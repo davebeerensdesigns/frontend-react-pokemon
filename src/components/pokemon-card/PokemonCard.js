@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import '../pokemon-card/PokemonCard.css';
 
 function PokemonCard({pokemon}) {
     const [data, setData] = useState({});
@@ -23,7 +24,7 @@ function PokemonCard({pokemon}) {
     }, []);
 
     return (
-        <div className='pokemon-card'>
+        <div className='pokemon-card__card'>
             <div className='pokemon-card__content'>
                 {loading && <div>Loading</div>}
                 {!loading && (

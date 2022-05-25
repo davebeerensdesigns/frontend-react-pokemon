@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PokemonCard from "../pokemon-card/PokemonCard";
 import axios from "axios";
+import '../pokemon-list/PokemonList.css';
 
 function PokemonList() {
 
@@ -27,32 +28,30 @@ function PokemonList() {
     }, [url]);
 
 
-
     return (
-        <div className='pokemon-card__list'>
-            {loading && <div>Loading</div>}
+        <>
+            <div className='pagination'>
+                <button disabled={!data.previous}
+                        onClick={() => {
+                            setUrl(data.previous)
+                        }}>Vorige
+                </button>
+                <button disabled={!data.next}
+                        onClick={() => {
+                            setUrl(data.next)
+                        }}>Volgende
+                </button>
+            </div>
+            <div className='pokemon-card__list'>
 
-            {!loading && (
-                <>
-                    <button disabled={!data.previous}
-                            onClick={() => {
-                                setUrl(data.previous)
-                            }}>Previous
-                    </button>
-                    <button disabled={!data.next}
-                            onClick={() => {
-                                setUrl(data.next)
-                            }}>Next
-                    </button>
-                    {
-                        data.results.map(pokemon => {
-                            return (<PokemonCard key={pokemon.name}
-                                                 pokemon={pokemon.url}/>)
-                        })
-                    }
-                </>
-            )}
-        </div>
+                {loading && <div>Loading</div>}
+
+                {!loading && (data.results.map(pokemon => {
+                    return (<PokemonCard key={pokemon.name}
+                                         pokemon={pokemon.url}/>)
+                }))}
+            </div>
+        </>
     );
 }
 
