@@ -1,11 +1,26 @@
-import React from 'react';
-import useFetchData from "../../services/UseFetchData";
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
 function PokemonCard({pokemon}) {
-    const {
-        data,
-        loading,
-    } = useFetchData(pokemon);
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    const fetchData = async (pokemon) => {
+        await axios.get(pokemon).then(
+            (response) => {
+                setData(response.data);
+                setLoading(false);
+            }
+        ).catch(
+            (error) => {
+                console.error(error)
+            }
+        )
+    };
+
+    useEffect(() => {
+        fetchData(pokemon);
+    }, []);
 
     return (
         <div className='pokemon-card'>

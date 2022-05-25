@@ -8,7 +8,7 @@ import PokemonList from "./components/pokemon-list/PokemonList";
 function App() {
 
     return (
-        <PokemonList url='https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20' />
+        <PokemonList />
     );
 }
 
